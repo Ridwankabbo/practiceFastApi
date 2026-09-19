@@ -1,2 +1,8 @@
 venv
+core/.venv
 .env
+uv.lock
+project
+pyproject.toml
+
+
