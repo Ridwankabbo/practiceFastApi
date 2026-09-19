@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from enum import Enum
 from pydantic import BaseModel
-from model import Item
+from .model import Item
 app = FastAPI()
 
 
