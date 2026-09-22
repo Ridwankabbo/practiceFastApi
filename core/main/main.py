@@ -1,6 +1,28 @@
 from fastapi import FastAPI
 from model.test import Item
+import psycopg2
+from decouple import config
+from psycopg2.extras import RealDictCursor
+
 app = FastAPI()
+
+
+while True:
+    try:
+        cnn = psycopg2.connect(
+            host= 'localhost',
+            database='practicefastapi',
+            user=config('DB_USERNAME'),
+            password=config('DB_PASSWORD'),
+            cursor_factory=RealDictCursor
+        )
+        cursor = cnn.cursor()
+        print("DB is connected successfully")
+        break
+    except Exception as e:
+        print(e)
+        
+        
 
 
 @app.get("/")
