@@ -1,5 +1,4 @@
-from sqlmodel import Field, SQLModel, create_engine, Session
-    
+from sqlmodel import Field, SQLModel, create_engine, Session, select
 class Hero(SQLModel, table=True):
     
     id: int | None=Field(default=None, primary_key=True)
@@ -24,11 +23,18 @@ def create_hero():
         
         session.commit()
         
+def select_heros():
+    with Session(engine) as session:
+        # statement = select(Hero)
+        results = session.exec(select(Hero)).all()
+        print(results)
+            
     
     
 def main():
     create_db_and_tables()
-    create_hero()
+    # create_hero()
+    select_heros()
     
 if __name__ == "__main__":
     main()
