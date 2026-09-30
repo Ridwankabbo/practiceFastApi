@@ -1,0 +1,10 @@
+venv
+core/.venv
+core/.env
+.env
+uv.lock
+project
+pyproject.toml
+core/database.db
+
+
