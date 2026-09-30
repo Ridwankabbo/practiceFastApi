@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from model.test import Item
+from model.test import Hero
 import psycopg2
 from decouple import config
 from psycopg2.extras import RealDictCursor
@@ -7,20 +7,20 @@ from psycopg2.extras import RealDictCursor
 app = FastAPI()
 
 
-while True:
-    try:
-        cnn = psycopg2.connect(
-            host= 'localhost',
-            database='practicefastapi',
-            user=config('DB_USERNAME'),
-            password=config('DB_PASSWORD'),
-            cursor_factory=RealDictCursor
-        )
-        cursor = cnn.cursor()
-        print("DB is connected successfully")
-        break
-    except Exception as e:
-        print(e)
+# while True:
+#     try:
+#         cnn = psycopg2.connect(
+#             host= 'localhost',
+#             database='practicefastapi',
+#             user=config('DB_USERNAME'),
+#             password=config('DB_PASSWORD'),
+#             cursor_factory=RealDictCursor
+#         )
+#         cursor = cnn.cursor()
+#         print("DB is connected successfully")
+#         break
+#     except Exception as e:
+#         print(e)
         
         
 
@@ -47,10 +47,3 @@ async def read_items(item_id:int, q:int | None=None):
     
     return {"item_id": item_id}
 
-
-@app.post("/items/")
-async def add_items(item: Item):
-    
-    return {
-        "item":item,
-    }

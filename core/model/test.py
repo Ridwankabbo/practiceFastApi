@@ -1,7 +1,15 @@
-from pydantic import BaseModel
-
-class Item(BaseModel):
+from sqlmodel import Field, SQLModel, create_engine
     
-    name:str
-    discription: str 
-    price: float
+class Hero(SQLModel, table=True):
+    
+    id: int | None=Field(default=None, primary_key=True)
+    name: str
+    secrate_name: str
+    age: int | None = None
+    
+sqlite_file_name = "database.db"
+sqlite_url= f"sqlite:///{sqlite_file_name}"
+    
+engine = create_engine(sqlite_url, echo=True)
+
+SQLModel.metadata.create_all(engine)
