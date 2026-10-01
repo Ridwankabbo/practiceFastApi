@@ -6,5 +6,9 @@ uv.lock
 project
 pyproject.toml
 core/database.db
+# migrations/env.py
+# migrations/script.py.mako
+# alembic.ini
+
 
 
