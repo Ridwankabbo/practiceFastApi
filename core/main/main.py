@@ -47,3 +47,52 @@ async def read_items(item_id:int, q:int | None=None):
     
     return {"item_id": item_id}
 
+from model.test import (
+    select_heros,
+    select_hero,
+    create_hero,
+    Hero,
+    Team,
+    create_team,
+    get_teams,
+    get_team_by_id
+)
+@app.get('/items/db/')
+async def show_data():
+    data = select_heros()
+    return data
+
+@app.get("/items/db/get/")
+async def show_item(id: int):
+    try:
+        data = select_hero(id)
+        return data
+    except Exception as e:
+        return f"an error occured {e}"
+    
+    
+@app.post('/items/add/')
+async def add_item(item:Hero):
+    create_hero(item)
+    
+    return "added successfully"
+
+
+@app.get('/team/litst')
+async def get_team_list():
+    list = get_teams()
+    return list
+
+@app.post('/items/team/add')
+async def add_team(team:Team):
+    create_team(team)
+    
+    return "Team created successfully"   
+from .model_schema import TeamRead
+@app.get('/teams/get/{id}', response_model=TeamRead)
+async def get_team(id:int):
+    item = get_team_by_id(id)
+    
+    return item
+     
+     
